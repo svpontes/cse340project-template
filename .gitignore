@@ -10,7 +10,11 @@ node_modules
 # .env file is for local use only. It contains
 # values not to be shared and most of the values
 # will be manually created by you or dynamically # created on the hosting server
+#every file that starts with period (um ponto) is tipically a "hidden file" env stands for environment. It Holds sensitive values
 .env
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+
+#ignore lock yalm file
+pnpm-lock.yaml

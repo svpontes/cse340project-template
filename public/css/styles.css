@@ -10,7 +10,7 @@
   --color-white: #fff;
   --color-background-light: #f4f4f4;
   --color-accent-blue: rgb(6, 146, 194);
-  --color-accent-blue-hover: #459af5;
+  --color-accent-yellow-hover: #f1fd06;
 }
 
 body{
@@ -85,7 +85,7 @@ nav ul li{
 
 nav ul li:hover{
 
-  background-color: var(--color-accent-blue-hover);
+  background-color: var(--color-accent-blue);
 }
 
 .hero{
@@ -100,6 +100,7 @@ nav ul li:hover{
 }
 
 .hero-content{
+
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -117,13 +118,13 @@ nav ul li:hover{
 
 .call-action{
 
-  background: linear-gradient(to right, rgba(255,255,255,1), rgb(255, 255, 255, 0.5));
+  background: linear-gradient(to right, rgba(255,255,255,1), rgb(255, 255, 255, 0.2));
   border: none;
   padding: 1rem;
   text-align: left;
   position: absolute;
   left: 10%;
-  bottom: 10%;
+  bottom: 45%;
   width: 250px;
   max-width: 80%;
 }
@@ -138,7 +139,7 @@ nav ul li:hover{
 .call-action p{
 
   color: var(--color-accent-blue);
-  font-size: 0.5rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 
 }
@@ -148,14 +149,18 @@ nav ul li:hover{
   background-color: var(--color-accent-blue);
   color: var(--color-black);
   padding: 0.5rem 1.2rem;
-  border: none;
+  /*box-shadow: 1px rgba(232, 202, 6, 0.2);*/
   cursor: pointer;
   font-size: 1rem;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   transition: background-color 0.3s ease;
 }
 
 .call-action button:hover {
-  background-color: var(--color-accent-blue);
+  background-color: var(--color-accent-yellow-hover);
 }
 
 footer{

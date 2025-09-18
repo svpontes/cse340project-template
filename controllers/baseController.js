@@ -8,6 +8,17 @@ baseController.buildHome = async function(req, res){
 
 module.exports = baseController
 
+/*
+const utilities = require("../utilities/")
+const baseController = {}
+
+baseController.buildHome = async function(req, res){
+  const nav = await utilities.getNav()
+  res.render("index", {title: "Home", nav})
+}
+
+module.exports = baseController
+
 /*const utilities = require("../utilities/") //imports an index.js file (which does not yet exist) from a utilities folder (which does not yet exist) 
 // which is one level above the current location inside the controllers folder.
 const baseControler = {} //creates an empty object named baseController

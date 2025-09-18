@@ -249,5 +249,5 @@ SET inv_description = REPLACE (
 WHERE inv_id = 10;
 -- 6 - Update all records in the inventory table to add "/vehicles" to the middle of the file path in the inv_image and inv_thumbnail columns
 UPDATE inventory
-SET inv_image = REPLACE(inv_image, '/images/', '/vehicles/images/'),
-  inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/vehicles/images/');
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles'),
+  inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images//vehicles/');

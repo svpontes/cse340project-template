@@ -2,7 +2,7 @@ const invModel = require("../models/inventory-model")
 const Util = {}
 
 /* **************************************
-* Build the classification view HTML
+* Constrói a visualização de classificação HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
   let grid
@@ -12,7 +12,7 @@ Util.buildClassificationGrid = async function(data){
       grid += '<li>'
       grid +=  '<a href="/inv/detail/'+ vehicle.inv_id
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model
-      + ' details"><img src="' + vehicle.inv_thumbnail.replace('/vehicles/', '/')
+      + ' details"><img src="' + vehicle.inv_thumbnail
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
@@ -36,7 +36,7 @@ Util.buildClassificationGrid = async function(data){
 
 
 /* ************************
- * Constructs the nav HTML unordered list
+ * Constrói a lista não ordenada de navegação em HTML
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()

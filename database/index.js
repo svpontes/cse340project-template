@@ -5,26 +5,31 @@ require("dotenv").config()
  * Connection Pool
  *
  * *************** */
-const isProduction = process.env.NODE_ENV === "production"//added to fix requirement of ssl fro render
+let pool
+if (process.env.NODE_ENV == "development") {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  })
 
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: isProduction ? { rejectUnauthorized: false } : false,
-})
-
-// Exportar o pool
-module.exports = {
-  async query(text, params) {
-    try {
-      const res = await pool.query(text, params)
-      if (!isProduction) {
+  // Adicionado para solucionar problemas de consultas durante o desenvolvimento
+  module.exports = {
+    async query(text, params) {
+      try {
+        const res = await pool.query(text, params)
         console.log("executed query", { text })
+        return res
+      } catch (error) {
+        console.error("error in query", { text })
+        throw error
       }
-      return res
-    } catch (error) {
-      console.error("error in query", { text, error: error.message })
-      throw error
-    }
-  },
+    },
+  }
+} else {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL, 
+  })
+  module.exports = pool
 }

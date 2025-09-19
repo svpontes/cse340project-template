@@ -29,7 +29,7 @@ if (process.env.NODE_ENV == "development") {
   }
 } else {
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL, //postgresql://cse340:mfTWGfLQW7oK107TbUBB0jE3yOOCdseH@dpg-d345k2nfte5s73eg6me0-a.frankfurt-postgres.render.com/cse340_0gi7
   })
   module.exports = pool
 }

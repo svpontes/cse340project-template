@@ -2,37 +2,37 @@ const invModel = require("../models/inventory-model")
 const Util = {}
 
 /* **************************************
-* Constrói a visualização de classificação HTML
+* Build view for html classification and details view 
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
   let grid
-  if(data.length > 0){
+  if (data.length > 0) {
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => {
       grid += '<li>'
-      grid +=  '<a href="/inv/detail/'+ vehicle.inv_id
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model
-      + ' details"><img src="' + vehicle.inv_thumbnail
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model
-      +' on CSE Motors" /></a>'
+      grid += '<a href="/inv/detail/' + vehicle.inv_id
+        + '" title="View ' + vehicle.inv_make + ' ' + vehicle.inv_model
+        + ' details"><img src="' + vehicle.inv_thumbnail
+        + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model
+        + ' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
-      grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="/inv/detail/' + vehicle.inv_id +'" title="View '
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">'
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
+      grid += '<a href="/inv/detail/' + vehicle.inv_id + '" title="View ' 
+        + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">'
+        + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
       grid += '<span>$'
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+        + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       grid += '</div>'
       grid += '</li>'
     })
     grid += '</ul>'
   } else {
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
 }
+
 
 
 /* ************************

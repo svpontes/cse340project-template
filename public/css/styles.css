@@ -227,6 +227,7 @@ footer{
 }
 
 /*Vehicles display Grid (cards)*/
+
 #inv-display{
   display: grid;
   grid-template-columns:  repeat(auto-fit, minmax(280px, 1fr));
@@ -269,11 +270,44 @@ footer{
 
 }
 
+.vehicle-detail{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2%;
+  gap: 5%;
+  
+}
+
+.vehicle-info{
+
+  display: flex;
+  flex-direction: column;
+  
+      
+}
+
+.vehicle-info p,
+.vehicle-info h2{
+
+ margin: 0px;
+}
+
+.vehicle-info p{
+  margin: 5px;
+
+}
+
 .vehicle-detail img{
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+h1.vehicleName {
+
+  text-align: center;
 }
 
 /*responsive*/
@@ -294,7 +328,7 @@ footer{
 
     #wrapper{
       
-      padding: 10px;
+      padding: 1px;
       
    }
 
@@ -327,4 +361,20 @@ footer{
   body{
     background-image: none;
   }
+
+    .vehicle-detail {
+  
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-top: 3%;
+  
+    }
+
+  .vehicle-detail img{
+
+    display: flex;
+    max-width: 100%;
+    width: 90%;
+    margin: 0 auto;
+}
 }

@@ -1,5 +1,16 @@
-<% const d=new Date() %>
-<% let year=d.getFullYear() %>
-    <footer>
-        <p class="copyright">&copy; <%=year%>, CSE 340 App</p>
-    </footer>
+<% const d=new Date(); %>
+<% const year=d.getFullYear(); %>
+
+<footer>
+    <p class="copyright">&copy; <%= year %>, CSE 340 App</p>
+    <p><a href="/trigger-error">Trigger 500 Error</a></p>
+
+    <% if (typeof title !=='undefined' ) { %>
+    <% } %>
+
+    <% if (typeof message !=='undefined' ) { %>
+        <p><%= message %></p>
+    <% } %>
+
+    <p><a href="/rota-falsa-123">False route - Test 404 Error</a></p>
+</footer>

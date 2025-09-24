@@ -12,6 +12,7 @@
   --color-accent-blue: rgb(6, 146, 194);
   --color-accent-yellow-hover: #f1fd06;
   --color-border-grey: grey;
+  --color-messages-flash: red;
 }
 
 body{
@@ -308,6 +309,13 @@ footer{
 h1.vehicleName {
 
   text-align: center;
+}
+
+/*Notice message*/
+.notice {
+
+  color: var(--color-messages-flash);
+  font-weight: 600;
 }
 
 /*responsive*/

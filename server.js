@@ -2,6 +2,7 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
@@ -14,6 +15,11 @@ const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoute = require("./routes/errorRoute")
 const utilities = require("./utilities/")
+const session = require("express-session")
+const pool = require('./database')
+const flash = require("connect-flash")
+const messages = require("express-messages")
+const accountRoute = require("./routes/accountRoute")
 
 /* ***********************
  * View Engine Templates
@@ -22,6 +28,27 @@ app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout")
 
+/* ***********************
+ * Middleware
+ *************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Flash Messages Middleware
+app.use(flash())
+app.use(function (req, res, next) {
+  res.locals.messages = messages(req, res)
+  next()
+})
+
 /* *************************
  * Routes
  *************************/
@@ -29,6 +56,7 @@ app.use(static)                     // rotas estáticas
 app.use("/inv", inventoryRoute)     // rotas do inventário
 app.use(errorRoute)                 // rota para erro intencional 500
 app.get("/", utilities.handleErrors(baseController.buildHome)) // página inicial
+app.use("/account", accountRoute)
 
 /* *************************
  * File Not Found Route - deve ser a última rota normal

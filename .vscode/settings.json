@@ -1,3 +1,17 @@
 {
-    "sqltools.connections": []
+    "sqltools.connections": [],
+    "editor.fontFamily": "Cascadia Code, Fira Code, Consolas, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 22,
+    "editor.fontLigatures": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.indentation": true,
+    "editor.tokenColorCustomizations": {
+    "comments": "#6A9955",
+    "keywords": "#569CD6",
+    "strings": "#CE9178",
+    "numbers": "#B5CEA8"
+}
+
+
 }

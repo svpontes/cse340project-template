@@ -20,6 +20,7 @@ const pool = require('./database')
 const flash = require("connect-flash")
 const messages = require("express-messages")
 const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
 
 /* ***********************
  * View Engine Templates
@@ -49,6 +50,10 @@ app.use(function (req, res, next) {
   next()
 })
 
+//process registration activity
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 /* *************************
  * Routes
  *************************/
@@ -56,7 +61,7 @@ app.use(static)                     // rotas estáticas
 app.use("/inv", inventoryRoute)     // rotas do inventário
 app.use(errorRoute)                 // rota para erro intencional 500
 app.get("/", utilities.handleErrors(baseController.buildHome)) // página inicial
-app.use("/account", accountRoute)
+app.use("/account", require("./routes/accountRoute")) //account routes
 
 /* *************************
  * File Not Found Route - deve ser a última rota normal

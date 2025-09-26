@@ -43,4 +43,35 @@ invCont.buildByInvId = async function (req, res, next) {
   })
 }
 
-module.exports = invCont
+/*Render view for add classification*/
+async function buildClassification(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+    error: null
+  })
+  
+}
+
+/*add clasification Submission process*/
+async function registerClassification(req, res, next) {
+  const { classification_name } = req.body
+  const regResult = await invModel.addClassification(classification_name)
+  let nav = await utilities.getNav()
+  
+  if (regResult) {
+    req.flash("New classification added successfully!")
+    res.redirect("/inv") //return to managment view
+  } else {
+    req.flash(500).render("inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      error: null
+    })
+  }
+  
+}
+
+
+module.exports = { invCont , buildClassification, registerClassification}

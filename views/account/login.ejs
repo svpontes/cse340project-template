@@ -1,5 +1,5 @@
 <main>
-    <h1>
+    <h1 class="login">
         <%= title %>
     </h1>
     <%- messages() %>
@@ -11,14 +11,16 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"/>
 
-            <button type="submit">Login</button>
+            <button id="btnSubLogin" type="submit">Login</button>
         </form>
+        <div class="requirements">
         <p>No Account? Please Register! <a href="/account/register">Sign-up</a></p>
-        <p>Password requirements:</p>
+        <p><strong>Password Requirements:</strong></p>
         <ul>
             <li>Minimum 12 characters</li>
             <li>At least 1 capital letter</li>
             <li>At least 1 number</li>
             <li>At least 1 special character</li>
         </ul>
+        </div>
 </main>

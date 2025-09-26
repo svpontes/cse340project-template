@@ -47,6 +47,10 @@ body{
   align-items: center;
 }
 
+header #top-header a{
+  text-align: center;
+}
+
 #tools a{
   color: var(--color-black);
   text-decoration: none;
@@ -317,6 +321,110 @@ h1.vehicleName {
   color: var(--color-messages-flash);
   font-weight: 600;
 }
+
+/*login styles*/
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  /* centraliza o formulário */
+  padding: 2rem;
+  background-color: var(--color-accent-blue);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  justify-items: center;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--color-background-light);
+  justify-items: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+button {
+
+  padding: 0.6rem 1.2rem;
+  background-color:var(--color-background-light);
+  color: var(--color-accent-blue);
+  border: solid 2px var(--color-accent-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  
+}
+
+.requirefield {
+
+  text-align: center;
+}
+
+.regpage{
+
+  text-align: center;
+}
+
+form#loginForm{
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  color: var(--color-background-light);
+  background-color: var(--color-accent-blue);
+  border: solid 2px var(--color-background-light);
+}
+
+/*error messages styles*/
+.notice {
+  background-color: #ffe6e6;
+  color: #d8000c;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  list-style-type: none;
+  text-align: center;
+  
+}
+
+.success {
+  background-color: #e6ffed;
+  color: #008000;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/*login page*/
+.login{
+  text-align: center;
+}
+
+.requirements{
+  text-align: center;
+  
+}
+.requirements ul{
+  list-style: none;
+}
+
 
 /*responsive*/
 /* Media Queries*/

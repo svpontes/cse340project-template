@@ -352,19 +352,7 @@ input[type="password"] {
   font-size: 1rem;
 }
 
-button {
 
-  padding: 0.6rem 1.2rem;
-  background-color:var(--color-background-light);
-  color: var(--color-accent-blue);
-  border: solid 2px var(--color-accent-blue);
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-  
-}
 
 .requirefield {
 
@@ -378,9 +366,21 @@ button {
 
 form#loginForm{
 
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+ ccccc
+}
+
+button {
+
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-background-light);
+  color: var(--color-accent-blue);
+  border: solid 2px var(--color-accent-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+
 }
 
 button:hover {
@@ -422,6 +422,17 @@ button:hover {
 }
 .requirements ul{
   list-style: none;
+}
+
+/*register classification page*/
+h1.pageRegisterTitle {
+  text-align: center;
+}
+
+button.btnAddVehicle{
+   text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 

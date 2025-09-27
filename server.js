@@ -109,3 +109,6 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
+app.get("/inv/test", (req, res) => {
+    res.send("rota /inv/test funcionando!")
+})

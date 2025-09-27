@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<% include ../partials/head.ejs %>
-
     <body>
-        <h1>Add Vehicle Classification</h1>
-        
+        <h1 class="pageRegisterTitle">Add Vehicle Classification</h1>
+
         <%- messages() %>
 
-            <form action="/inv/add-classification" method="POST" id="addClassificationForm" novalidate>
+            <form action="/inv/add-classification" method="POST" id="addClassificationForm">
                 <label for="classification_name">Classification Name</label>
                 <input type="text" id="classification_name" name="classification_name" required pattern="^[A-Za-z0-9]+$"
                     title="No spaces or special characters allowed.">
-                <button type="submit">Add Classification</button>
+                <div>
+                    <button class="btnAddVehicle" type="submit">Add Classification</button>
+                </div>
             </form>
     </body>
 

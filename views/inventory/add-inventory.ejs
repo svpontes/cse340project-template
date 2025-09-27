@@ -1,0 +1,81 @@
+<main>
+    <h1 class="page-title">Add Inventory</h1>
+
+    <!-- Mensagens flash (seres.locals.messages estiver configurado) -->
+    <% if (locals.messages && locals.messages.success && locals.messages.success.length) { %>
+        <div class="flash success">
+            <%= locals.messages.success[0] %>
+        </div>
+        <% } %>
+            <% if (locals.messages && locals.messages.error && locals.messages.error.length) { %>
+                <div class="flash error">
+                    <%= locals.messages.error[0] %>
+                </div>
+                <% } %>
+
+                    <!-- Erros de validação server-side -->
+                    <% if (typeof errors !=="undefined" && errors.length) { %>
+                        <div class="error-list">
+                            <ul>
+                                <% errors.forEach(function(err){ %>
+                                    <li>
+                                        <%= err %>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                        </div>
+                        <% } %>
+
+                            <form id="addInventoryForm" action="/inv/add-inventory" method="POST" novalidate>
+                                <fieldset>
+                                    <legend>Vehicle details</legend>
+
+                                    <label for="classificationList">Classification</label>
+                                    <div class="select-wrapper">
+                                        <%- classificationList %> <!-- HTML gerado pelo Util.buildClassificationList -->
+                                    </div>
+
+                                    <label for="inv_make">Make</label>
+                                    <input id="inv_make" name="inv_make" type="text" required maxlength="50"
+                                        value="<%= inventoryData.inv_make || '' %>" pattern="^[A-Za-z0-9\s\-]+$"
+                                        title="Only letters, numbers, spaces and hyphens allowed.">
+
+                                    <label for="inv_model">Model</label>
+                                    <input id="inv_model" name="inv_model" type="text" required maxlength="50"
+                                        value="<%= inventoryData.inv_model || '' %>">
+
+                                    <label for="inv_year">Year</label>
+                                    <input id="inv_year" name="inv_year" type="number" required min="1900" max="2099"
+                                        value="<%= inventoryData.inv_year || '' %>">
+
+                                    <label for="inv_miles">Miles</label>
+                                    <input id="inv_miles" name="inv_miles" type="text" required maxlength="50" 
+                                        value="<%= inventoryData.inv_mile || '' %>">
+                                    
+                                    <label for="inv_color">Color</label>
+                                    <input type="text" id="inv_color" name="inv_color" 
+                                        value="<%= inventoryData.inv_color || '' %>" required>
+
+
+                                    <label for="inv_price">Price (USD)</label>
+                                    <input id="inv_price" name="inv_price" type="number" required step="0.01" min="0"
+                                        value="<%= inventoryData.inv_price || '' %>">
+
+                                    <label for="inv_description">Description</label>
+                                    <textarea id="inv_description" name="inv_description" required minlength="10"
+                                        maxlength="2000"><%= inventoryData.inv_description || '' %></textarea>
+
+                                    <label for="inv_image">Image path</label>
+                                    <input id="inv_image" name="inv_image" type="text" required
+                                        value="<%= inventoryData.inv_image || '/images/no-image-available.png' %>"
+                                        title="Relative path to image file.">
+
+                                    <label for="inv_thumbnail">Thumbnail path</label>
+                                    <input id="inv_thumbnail" name="inv_thumbnail" type="text" required
+                                        value="<%= inventoryData.inv_thumbnail || '/images/no-image-available-tn.png' %>"
+                                        title="Relative path to thumbnail.">
+
+                                    <button type="submit">Add Vehicle</button>
+                                </fieldset>
+                            </form>
+</main>

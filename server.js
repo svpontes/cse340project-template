@@ -6,6 +6,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -43,6 +44,10 @@ app.use(session({
   name: 'sessionId',
 }))
 
+/* Cookie parser - necessário para JWT */
+app.use(cookieParser())
+console.log("✅ cookieParser middleware carregado")
+
 // Flash Messages Middleware
 app.use(flash())
 app.use(function (req, res, next) {
@@ -50,18 +55,31 @@ app.use(function (req, res, next) {
   next()
 })
 
-//process registration activity
+// Body parsers
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })) 
 
 /* *************************
- * Routes
+ * Rotas públicas (antes do checkJWTToken)
  *************************/
-app.use(static)                     // rotas estáticas
-app.use("/inv", inventoryRoute)     // rotas do inventário
+app.use(static)                     
+app.use("/inv", inventoryRoute)     
+app.get("/", utilities.handleErrors(baseController.buildHome)) 
+app.use("/account", accountRoute) // Login, Register etc.
+
+/* *************************
+ * JWT Middleware (depois das rotas públicas)
+ *************************/
+app.use((req, res, next) => {
+  console.log("📥 Recebendo cookies:", req.cookies)
+  next()
+})
+
+
+/* *************************
+ * Outras rotas
+ *************************/
 app.use(errorRoute)                 // rota para erro intencional 500
-app.get("/", utilities.handleErrors(baseController.buildHome)) // página inicial
-app.use("/account", require("./routes/accountRoute")) //account routes
 
 /* *************************
  * File Not Found Route - deve ser a última rota normal
@@ -80,19 +98,17 @@ const port = process.env.PORT
 const host = process.env.HOST
 
 /* ***********************
- * Log statement to confirm server operation
- *************************/
+ * Log statement to confirm server operation*/
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
+  console.log(`🚀 app listening on ${host}:${port}`)
 })
 
 /* ***********************
  * Express Error Handler
- * Deve estar após todas as rotas
  *************************/
 app.use(async (err, req, res, next) => {
   const nav = await utilities.getNav();
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  console.error(`❌ Error at: "${req.originalUrl}": ${err.message}`);
 
   let message;
   if (err.status === 404) {
@@ -109,6 +125,13 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
+
+/* JWT authorization middleware */
+app.use(utilities.checkJWTToken);
+console.log("🛡️ Middleware JWT aplicado globalmente");
+
+
+/* Test route */
 app.get("/inv/test", (req, res) => {
     res.send("rota /inv/test funcionando!")
 })

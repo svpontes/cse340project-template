@@ -1,7 +1,7 @@
 const invModel = require("../models/inventory-model")
-const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+const Util = {}
 
 /* **************************************
 * Build view for html classification and details view 
@@ -104,7 +104,7 @@ Util.checkJWTToken = (req, res, next) => {
      return res.redirect("/account/login")
     }
     res.locals.accountData = accountData
-    res.locals.loggedin = 1
+    res.locals.loggedin = true
     next()
    })
  } else {

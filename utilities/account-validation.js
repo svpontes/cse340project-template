@@ -5,7 +5,6 @@ const { body, validationResult } = require("express-validator")
 const accountModel = require("../models/account-model")
 const validate = {}
 
-
 /*  **********************************
   *  Registration Data Validation Rules
   * ********************************* */
@@ -111,6 +110,65 @@ validate.checkLoginData = async (req, res, next) => {
       account_email,
     })
     return
+  }
+  next()
+}
+
+
+
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname").trim().notEmpty().withMessage("First name is required."),
+    body("account_lastname").trim().notEmpty().withMessage("Last name is required."),
+    body("account_email").trim().isEmail().withMessage("Valid email is required.")
+      .custom(async (email, { req }) => {
+        const existing = await accountModel.getAccountByEmail(email)
+        if (existing && existing.account_id != req.body.account_id) {
+          throw new Error("Email already in use.")
+        }
+      })
+  ]
+}
+
+validate.checkUpdatedAccount = async (req, res, next) => {
+  const errors = validationResult(req);
+  const accountData = req.body;
+  const nav = await require("./").getNav();
+
+  if (!errors.isEmpty()) {
+    return res.render("account/update-account", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      accountData
+    });
+  }
+  next()
+};
+
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .isLength({ min: 12 }).withMessage("Password must be at least 12 characters.")
+      .matches(/[A-Z]/).withMessage("Password must contain an uppercase letter.")
+      .matches(/[0-9]/).withMessage("Password must contain a number.")
+      .matches(/[^A-Za-z0-9]/).withMessage("Password must contain a special character.")
+  ]
+}
+
+validate.checkPassword = async (req, res, next) => {
+  const errors = validationResult(req);
+  const accountData = await accountModel.getAccountById(req.body.account_id);
+  const nav = await require("./").getNav();
+
+  if (!errors.isEmpty()) {
+    return res.render("account/update-account", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      accountData,
+    })
   }
   next()
 }

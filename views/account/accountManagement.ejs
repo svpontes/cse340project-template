@@ -6,7 +6,21 @@
     <%- messages() %>
 
         <div class="Welcome">
-            <h2>Welcome New</h2>
+            <h2>Welcome <%= accountData.account_firstname %>
+            </h2>
             <p>You are logged in.</p>
+
+            <!-- Link para atualizar conta (visível para todos) -->
+            <p>
+                <a href="/account/update/<%= accountData.account_id %>">Update Account Information</a>
+            </p>
+
+            <!-- Seção de gestão de inventário (somente para Employee/Admin) -->
+            <% if (accountData.account_type==="Employee" || accountData.account_type==="Admin" ) { %>
+                <h3>Inventory Management</h3>
+                <p>
+                    <a href="/inv/">Access Inventory Management</a>
+                </p>
+                <% } %>
         </div>
 </main>

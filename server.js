@@ -44,9 +44,7 @@ app.use(session({
   name: 'sessionId',
 }))
 
-/* Cookie parser - necessário para JWT */
-app.use(cookieParser())
-console.log("✅ cookieParser middleware carregado")
+
 
 // Flash Messages Middleware
 app.use(flash())
@@ -58,6 +56,20 @@ app.use(function (req, res, next) {
 // Body parsers
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) 
+
+/* Cookie parser - necessário para JWT */
+app.use(cookieParser())
+console.log("✅ cookieParser middleware carregado")
+
+/* JWT authorization middleware */
+app.use(utilities.checkJWTToken);
+console.log("🛡️ Middleware JWT aplicado globalmente");
+
+
+/* Test route */
+app.get("/inv/test", (req, res) => {
+    res.send("rota /inv/test funcionando!")
+})
 
 /* *************************
  * Rotas públicas (antes do checkJWTToken)
@@ -100,7 +112,7 @@ const host = process.env.HOST
 /* ***********************
  * Log statement to confirm server operation*/
 app.listen(port, () => {
-  console.log(`🚀 app listening on ${host}:${port}`)
+  console.log(`app listening on ${host}:${port}`)
 })
 
 /* ***********************
@@ -126,12 +138,4 @@ app.use(async (err, req, res, next) => {
   })
 })
 
-/* JWT authorization middleware */
-app.use(utilities.checkJWTToken);
-console.log("🛡️ Middleware JWT aplicado globalmente");
 
-
-/* Test route */
-app.get("/inv/test", (req, res) => {
-    res.send("rota /inv/test funcionando!")
-})

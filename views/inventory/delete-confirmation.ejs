@@ -1,0 +1,39 @@
+<main>
+    <h1 class="page-title">Delete Inventory</h1>
+
+    <p>Confirm Deletion - The delete is permanent.</p>
+
+    <!-- Mensagens flash -->
+    <% if (locals.messages && locals.messages.success && locals.messages.success.length) { %>
+        <div class="flash success">
+            <%= locals.messages.success[0] %>
+        </div>
+        <% } %>
+            <% if (locals.messages && locals.messages.error && locals.messages.error.length) { %>
+                <div class="flash error">
+                    <%= locals.messages.error[0] %>
+                </div>
+                <% } %>
+
+                    <form id="deleteInventoryForm" action="/inv/delete" method="POST">
+                        <fieldset>
+                            <legend>Vehicle Details</legend>
+
+                            <label for="inv_make">Make</label>
+                            <input id="inv_make" name="inv_make" type="text" readonly value="<%= inv_make %>">
+
+                            <label for="inv_model">Model</label>
+                            <input id="inv_model" name="inv_model" type="text" readonly value="<%= inv_model %>">
+
+                            <label for="inv_year">Year</label>
+                            <input id="inv_year" name="inv_year" type="text" readonly value="<%= inv_year %>">
+
+                            <label for="inv_price">Price</label>
+                            <input id="inv_price" name="inv_price" type="text" readonly value="<%= inv_price %>">
+
+                            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+                            <button type="submit">Delete Vehicle</button>
+                        </fieldset>
+                    </form>
+</main>

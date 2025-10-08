@@ -21,23 +21,29 @@ invCont.buildByClassificationId = async function (req, res, next) {
     grid,
   })
 }
-
+//ADDED FEATURE week 6 week 7 images gallery
 /* Vehicle detail view */
 invCont.buildByInvId = async function (req, res, next) {
   const inv_id = req.params.invId
-  const vehicle = await invModel.getVehicleById(inv_id)
+  //change the call to getVehicleById para getVehicleDetails
+  const vehicleData = await invModel.getVehicleDetails(inv_id) 
+  //const vehicle = await invModel.getVehicleById(inv_id)
   const nav = await utilities.getNav()
 
-  if (!vehicle) {
+  if (!vehicleData) {
     return next(new Error("Vehicle not found!"))
   }
 
   res.render("./inventory/vehicleDetails", {
-    title: vehicle.inv_make + " " + vehicle.inv_model,
-    nav,
-    vehicle,
-  })
+    //title: vehicle.inv_make + " " + vehicle.inv_model,
+   // nav,
+    //vehicle,
+        title: vehicleData.inv_make + " " + vehicleData.inv_model,
+        nav,
+        vehicle: vehicleData, // vehicle agora inclui a propriedade .gallery
+    })
 }
+
 //Deliver inventory management function
 /* Management view */
 invCont.buildManagementView = async function (req, res, next) {

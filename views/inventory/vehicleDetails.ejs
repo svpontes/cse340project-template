@@ -1,6 +1,6 @@
             <main>
                 <div class="vehicle-detail">
-                    <img src="<%= vehicle.inv_image %>"
+                    <img id="main-image" src="<%= vehicle.inv_image %>"
                         alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>" />
                     <div class="vehicle-info">
                             <h2>
@@ -15,7 +15,23 @@
                         <p><strong>Description:</strong> <%= vehicle.inv_description %>
                         </p>
                     </div>
+                    
                 </div>
+                <div class="carGallery">
+                    <% if (vehicle.gallery && vehicle.gallery.length> 0) { %>
+                        <h3 class="gallery-title">More Vehicle Details </h3>
+                        <div class="thumb-gallery">
+                
+                            <% vehicle.gallery.forEach(function(imagem) { %>
+                                <div class="main-img-container">
+                                <img src="<%= imagem.thumb %>" width="500" height="320" alt="<%= imagem.alt %>" class="thumbimg"
+                                    data-full-src="<%= imagem.full %>" onclick="changeThumbnail(this)" />
+                
+                                <% }); %>
+                                </div>
+                
+                        </div>
+                        <% } %>
+                </div>
+                <script src="/js/inventory.js"></script>
             </main>
-
-        

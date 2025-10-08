@@ -40,6 +40,59 @@ async function getVehicleById(inv_id) {
   }
 }
 
+//***************feature added week6 week 7 - Added feature*****************************************
+//***************added lines to get vehice details gallery images***********************************
+async function getVehicleDetails(inv_id) {
+    try {
+        const sql = `
+            SELECT
+                i.*,
+                gi.thumb_path,
+                gi.img_full_resol_path,
+                gi.img_description,
+                gi.view_order
+            FROM
+                inventory AS i
+            LEFT JOIN
+                inventory_images AS gi ON i.inv_id = gi.id_vehicle
+            WHERE
+                i.inv_id = $1
+            ORDER BY
+                gi.view_order ASC;
+        `;
+        
+        const data = await pool.query(sql, [inv_id]);
+
+        if (data.rows.length === 0) {
+            return null; // Veículo não encontrado
+        }
+
+        // Mapear o resultado para um único objeto de veículo com uma lista de galeria
+        const vehicle = data.rows[0];
+        
+        // Se houver dados da galeria (gi.thumb_path não for null), mapear
+        const gallery = data.rows
+            .filter(row => row.thumb_path) // Filtra linhas onde não há dados de galeria (LEFT JOIN)
+            .map(row => ({
+                thumb: row.thumb_path,
+                full: row.img_full_resol_path,
+                alt: row.img_description,
+                order: row.view_order
+            }));
+            
+        // Retorna o veículo principal (que contém todos os dados 'i.*')
+        // mais a nova propriedade 'gallery'
+        return { 
+            ...vehicle,
+            gallery: gallery
+        };
+        
+    } catch (error) {
+        console.error("getVehicleDetails error ", error);
+        throw error; // Propagar o erro
+    }
+}
+
 //Add classification model
 async function addClassification(classification_name) {
   try {
@@ -144,5 +197,9 @@ async function deleteInventory(inv_id) {
 }
 
 
+
 //module.exports = { getClassifications }
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventoryModel, getInventoryById, updateInventory, deleteInventory}
+module.exports = {
+  getClassifications, getInventoryByClassificationId, getVehicleById, addClassification,
+  addInventoryModel, getInventoryById, updateInventory, deleteInventory, getVehicleDetails
+}

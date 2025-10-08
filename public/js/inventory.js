@@ -42,3 +42,21 @@ function buildInventoryList(data) {
  // Display the contents in the Inventory Management view 
  inventoryDisplay.innerHTML = dataTable; 
 }
+
+function changeThumbnail(thumbClicked) {
+        const mainImage = document.getElementById('main-image');
+        
+        // 1. Obtém o caminho da imagem FULL (alta resolução)
+        const pathFullimg = thumbClicked.getAttribute('data-full-src');
+        console.log('Caminho de alta resolução buscado:', pathFullimg);
+        // 2. Troca o src da imagem principal.
+        // NOTA: É CRUCIAL que a sua tag IMG principal no EJS tenha o ID 'imagem-principal'
+        mainImage.src = pathFullimg;
+        
+        // 3. Gestão da classe "ativa" para destaque visual
+        const thumb = document.querySelectorAll('.thumbimg');
+        thumb.forEach(thumbnail => {
+            thumbnail.classList.remove('active');
+        });
+        thumbClicked.classList.add('active');
+}

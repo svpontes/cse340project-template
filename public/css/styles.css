@@ -178,6 +178,24 @@ nav ul li:hover{
   
 }
 
+.vehicle-info h2{
+
+  color: var(--color-accent-blue)
+}
+
+
+
+#main-image {
+  width: 100%;
+
+  /* Define uma altura fixa para a imagem, impedindo o salto */
+  /* AJUSTE ESTE VALOR para o maior tamanho que suas imagens atingem. */
+  height: 450px;
+
+  object-fit: contain;
+  /* Garante que toda a imagem é visível */
+}
+
 .upgrades{
 
   display: grid;
@@ -223,6 +241,50 @@ nav ul li:hover{
   color: var(--color-accent-blue);
   font-size: 1.5rem;
 }
+
+/*style for the gallery***********************************************************/
+/* Container da Galeria de Miniaturas */
+
+
+.main-img-container{
+
+  display: flex;
+  /*object-fit: contain;*/
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  gap: 5px;
+  max-width: 100%;
+ /* aspect-ratio: 16/9;*/
+  height: auto;
+
+}
+
+
+.thumbimg{
+  
+    width: 150px;
+    height: 100px;
+    
+}
+
+.carGallery h3{
+  margin-top: 45px;
+  color: var(--color-accent-blue);
+}
+/* Estilo para a miniatura selecionada */
+.thumbimg:hover,
+.thumbimg.active {
+  /* Use '.active' se a sua função JS usar essa classe */
+  opacity: 1;
+  border-color: var(--color-accent-blue);
+  /* Exemplo de cor de destaque ****************************************************/
+}
+/**********************************/
+
+
+/******************************/
+
 
 footer{
 
@@ -280,7 +342,7 @@ footer{
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 2%;
-  gap: 5%;
+  gap: 1%;
   
 }
 
@@ -487,7 +549,7 @@ button.btnAddVehicle{
   
       display: grid;
       grid-template-columns: 1fr;
-      margin-top: 3%;
+      margin-top: 1%;
   
     }
 
@@ -498,4 +560,40 @@ button.btnAddVehicle{
     width: 90%;
     margin: 0 auto;
 }
+    .carGallery {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      width: 80%;
+      height: auto;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      text-align: center;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      
+    }
+     .carGallery img {
+    flex-shrink: 0;            /* impede imagens de encolher */
+    width: 80%;                /* controla o tamanho das imagens no mobile */
+    max-width: 300px;
+    border-radius: 10px;
+  }
+
+    .thumb-gallery {
+  
+      overflow-x: scroll;
+      scrollbar-width: thin;
+      scrollbar-color: #cbcbcb #ffffff;
+  
+    }
+
+      .main-img-container {
+             
+           aspect-ratio: 16/9;
+             
+        }
+
+
 }
